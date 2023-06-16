@@ -9,7 +9,8 @@ with open("token.txt", "r") as f:
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("hello", hello_funct))
-    app.add_handler(CommandHandler("Waddup", waddup_funct))
+    app.add_handler(CommandHandler("waddup", waddup_funct))
+    app.add_handler(CommandHandler("smile", smile_funct))
     app.run_polling()
 
 async def hello_funct(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -19,6 +20,9 @@ async def hello_funct(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def waddup_funct(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     waddup_var = update.effective_user.first_name
     await update.message.reply_text("Waddup %s, fr no cap" % waddup_var)
+
+async def smile_funct(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(":)")
 
 if __name__ == '__main__':
     main()
